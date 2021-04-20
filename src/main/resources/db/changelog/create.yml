@@ -1,0 +1,33 @@
+databaseChangeLog:
+- changeSet:
+    author: "andrei"
+    id: "creates_currency_table"
+    changes:
+    - createTable:
+        tableName: "currency"
+        columns:
+        - column:
+            name: "id"
+            type: "BIGINT"
+            autoIncrement: "true"
+            constraints:
+              primaryKey: "true"
+        - column:
+            name: "currency"
+            type: "VARCHAR(255)"
+            constraints:
+              nullable: "false"
+              unique: "false"
+        - column:
+            name: "rate"
+            type: "DECIMAL(10,4)"
+            constraints:
+              nullable: "false"
+              unique: "false"
+        - column:
+            name: "date"
+            type: "DATE"
+            constraints:
+              nullable: "false"
+              unique: "false"
+

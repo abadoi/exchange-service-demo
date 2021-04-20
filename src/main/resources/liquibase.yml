@@ -1,0 +1,5 @@
+url: jdbc:mysql://localhost:3306/ecolytiq?useSSL=false
+username: root
+password: ba2andrei
+driver: com.mysql.cj.jdbc.Driver
+outputChangeLogFile: src/main/resources/db/liquibase-OutputChangelog.yml
