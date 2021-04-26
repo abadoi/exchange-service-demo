@@ -39,8 +39,16 @@ public class CurrencyService {
         }
     }
 
-    public Page<Currency> getAllByDateAndCurrency (Date date, String currency, Pageable p){
-        return currencyRepository.findAllByDateAndCurrency(date, currency, p);
+    public List<Currency> getAllByDate(Date date){
+        return currencyRepository.findAllByDate(date);
+    }
+
+    public Currency getByDateAndCurrency (Date date, String currency){
+        return currencyRepository.findByDateAndCurrency(date, currency);
+    }
+
+    public Page<Currency> getAllByCurrency (String currency, Pageable p){
+        return currencyRepository.findAllByCurrency(currency, p);
     }
 
 }
