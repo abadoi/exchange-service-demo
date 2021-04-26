@@ -1,12 +1,14 @@
 package com.andrei.exchange.service;
 
-import com.andrei.exchange.model.Currency;
+import com.andrei.exchange.models.Currency;
 import com.andrei.exchange.repository.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -30,4 +32,15 @@ public class CurrencyService {
     public void deleteCurrency(Integer id) {
         currencyRepository.deleteById(id);
     }
+
+    public void saveCurrencyList(List<Currency> currencyList) {
+        if(currencyRepository.findAllByDate(currencyList.get(0).getDate()).size() == 0) {
+            currencyRepository.saveAll(currencyList);
+        }
+    }
+
+    public Page<Currency> getAllByDateAndCurrency (Date date, String currency, Pageable p){
+        return currencyRepository.findAllByDateAndCurrency(date, currency, p);
+    }
+
 }
