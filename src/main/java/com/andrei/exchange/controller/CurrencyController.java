@@ -14,9 +14,9 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.beans.factory.annotation.*;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -49,10 +49,9 @@ public class CurrencyController {
 
     @ResponseBody
     @GetMapping("/currency/all")
-    public List<Currency> getAllCurrency(@PageableDefault(value=10, page=0) Pageable pageable, @RequestParam(value = "currency") String currency) {
-        // sort by date in descending order
-        Pageable newPageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("date").descending());
-        Page page = currencyService.getAllByCurrency(currency, newPageRequest);
+    public List<Currency> getAllCurrency(@PageableDefault(value=10, page=0) @SortDefault(sort = "date", direction = Sort.Direction.DESC) Pageable pageable, @RequestParam(value = "currency") String currency) {
+        // sort by date in descending order, page_size = 10
+        Page<Currency> page = currencyService.getAllByCurrency(currency, pageable);
 
         // prevent requesting a non-existing page
         if(page.getTotalElements() > pageable.getPageNumber())

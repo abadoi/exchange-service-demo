@@ -1,5 +1,7 @@
 package com.andrei.exchange.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,6 +22,7 @@ public class Currency {
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone="IST")
     private Date date;
 
     public Currency() {
