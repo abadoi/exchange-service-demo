@@ -1,5 +1,7 @@
 # exchange-service-demo
 
+This is an exchange service that fetches data from an external api (in XML format) and stores it in a database. It has multiple endpoints to retrieve exchange rates for EUR based on currency and date.
+
 # Prerequisites
 - Maven 3.6+
 - Spring Boot 2+
@@ -17,7 +19,7 @@
 - `docker ps`: Check docker instances
 - `http://localhost:8080/`: The endpoint
   - `/fetch` - to fetch data from XML: https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
-  - '/date' - get all currency rates from date
+  - `/date` - get all currency rates from date
       - param: `date`
       - result: non-paginated list of currencies
   - `/currency` - get a specific currency rate
@@ -37,12 +39,15 @@
 # Dockers
 
 ### Docker Images
-- `db`: Image with MySQL 8;
-- `app`: Based on an image with Java JDK 11(`adoptopenjdk/openjdk11:alpine-jre`), which is build in a separate image with Maven(`maven:3.6-jdk-11-slim`);
+- `mysql:8.0`: Image with MySQL 8;
+- `maven:3.6-jdk-11-slim` as BUILD;
+- `adoptopenjdk/openjdk11:alpine-jre` : to run the jar file copied from BUILD;
 
 ### Docker Instances
-- `exchange-service-demo`: Running the `exchange-0.0.1-SNAPSHOT` image. There are a service with Netty Server running the JAR file at port 8080;
-
+- `exchange-service-demo`: Running the `exchange-0.0.1-SNAPSHOT` jar image.
+    - `db`: Image with MySQL 8;
+    - `app`: Based on an image with Java JDK 11;
+    - 
 ### Docker Commands
 - `docker ps`: show all Docker Instances running;
 - `docker ps -a`: show all Docker Instances;
