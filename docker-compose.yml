@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  db:
+    container_name: db
+    image: mysql:8.0
+    restart: always
+    ports:
+        - "3306:3306"
+    networks:
+        - default
+    environment:
+        MYSQL_ROOT_PASSWORD: 'root'
+        MYSQL_DATABASE: 'ecolytiq'
+        MYSQL_USER: 'andreibadoi'
+        MYSQL_PASSWORD: 'pass'
+  app:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    container_name: app
+    restart: always # set restart=always to wait for db to start
+    networks:
+        - default
+    depends_on: 
+        - db
+    ports:
+        - "8080:8080"
+    expose: 
+        - "8080"
+    environment:
+        SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/ecolytiq?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+        SPRING_DATASOURCE_USERNAME: andreibadoi
+        SPRING_DATASOURCE_PASSWORD: pass

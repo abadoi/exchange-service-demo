@@ -2,7 +2,10 @@ spring:
     datasource:
         url: jdbc:mysql://localhost:3306/ecolytiq?useSSL=false&createDatabaseIfNotExist=true
         username: root
-        password: ba2andrei
+        password:
+#        url: jdbc:mysql://db:3306/ecolytiq?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+#        username: andreibadoi
+#        password: pass
 
     jpa:
         hibernate:
