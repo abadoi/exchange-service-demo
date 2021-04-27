@@ -47,7 +47,7 @@ This is an exchange service that fetches data from an external api (in XML forma
 - `exchange-service-demo`: Running the `exchange-0.0.1-SNAPSHOT` jar image.
     - `db`: Image with MySQL 8;
     - `app`: Based on an image with Java JDK 11;
-    - 
+    
 ### Docker Commands
 - `docker ps`: show all Docker Instances running;
 - `docker ps -a`: show all Docker Instances;
